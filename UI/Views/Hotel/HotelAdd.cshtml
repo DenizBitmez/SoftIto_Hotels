@@ -1,0 +1,34 @@
+﻿@model List<Entity.Concreate.Hotel>
+@{
+    ViewBag.Title = "HotelAdd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HotelAdd</h2>
+
+@using (Html.BeginForm("HotelAdd", "Hotel", FormMethod.Post))
+{
+    <div class="form-group">
+        @*@Html.Label("Hotel Adı")
+        @Html.TextBoxFor(x =>x.HotelTopic , new { @class = "form-control" })*@
+        <br />
+        @Html.Label("Hotel fiyatı")
+        @Html.TextBoxFor(x => x.HotelPrice, new { @class = "form-control" })
+        <br />
+        @Html.Label("Hotel Fotosu")
+        @Html.TextBoxFor(x => x.HotelPhoto, new { @class = "form-control" })
+        <br />
+        @Html.Label("Hotel Açıklaması")
+        @Html.TextBoxFor(x => x.HotelDescription, new { @class = "form-control" })
+        <br />
+        @*@Html.Label("Kategoriler")
+        @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.d, new { @class = "form-control" })*@
+       
+            <br />
+            <br />
+            <br />
+        
+            <button class="btn btn-primary">Kaydet</button>
+        </div>
+
+}
