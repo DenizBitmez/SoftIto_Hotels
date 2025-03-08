@@ -1,0 +1,140 @@
+﻿@model Entity.Concreate.Order
+
+@{
+    ViewBag.Title = "Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Booking Section Start -->
+<div id="booking">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Otel Rezervasyonu</h2>
+            <p>Bu alandan rezervasyonunuzu yapabilirsiniz</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="booking-form">
+                    <div id="success"></div>
+                    <form name="sentMessage" method="post" novalidate="novalidate">
+                        <!-- Otel Seçimi Dropdown -->
+                        <div class="form-row">
+                            <div class="control-group col-md-12">
+                                <label>Otel Seçiniz</label>
+                                <select class="custom-select form-control" name="HotelId" required="required">
+                                    <option value="">Otel Seçiniz</option>
+                                    @foreach (var hotel in ViewBag.Hotels as SelectList)
+                                    {
+                                        <option value="@hotel.Value" @(Model.HotelId == Convert.ToInt32(hotel.Value) ? "selected" : "")>
+                                            @hotel.Text
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- İsim, Soyisim ve Diğer Form Alanları -->
+                        <div class="form-row">
+                            <div class="control-group col-md-6">
+                                <label>İsim</label>
+                                <input type="text" class="form-control" name="FirstName" placeholder="Örn. Mehmet Rafii" required="required"
+                                       value="@Model.FirstName" />
+                            </div>
+                            <div class="control-group col-md-6">
+                                <label>Soyisim</label>
+                                <input type="text" class="form-control" name="LastName" placeholder="Örn. Akkuş" required="required"
+                                       value="@Model.LastName" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="control-group col-md-6">
+                                <label>Telefon Numarası</label>
+                                <input type="text" class="form-control" name="Phone" placeholder="Örn. +90 555 656 4876" required="required"
+                                       value="@Model.Phone" />
+                            </div>
+                            <div class="control-group col-md-6">
+                                <label>Email</label>
+                                <input type="email" class="form-control" name="Email" placeholder="Örn. email@gmail.com" required="required"
+                                       value="@Model.Email" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="control-group col-md-6">
+                                <label>Check-In Tarihi</label>
+                                <input type="date" class="form-control" name="CheckInDate" required="required"
+                                       value="@Model.CheckInDate?.ToString(" yyyy-MM-dd")" />
+                            </div>
+                            <div class="control-group col-md-6">
+                                <label>Check-Out Tarihi</label>
+                                <input type="date" class="form-control" name="CheckOutDate" required="required"
+                                       value="@Model.CheckOutDate?.ToString(" yyyy-MM-dd")" />
+                            </div>
+                        </div>
+
+                        <!-- Yetişkin ve Çocuk Sayısı -->
+                        <div class="form-row">
+                            <div class="control-group col-md-6">
+                                <label>Yetişkin Sayısı</label>
+                                <select class="custom-select form-control" name="AdultCount">
+                                    @for (int i = 0; i <= 10; i++)
+                                    {
+                                        <option value="@i" @(Model.AdultCount == i ? "selected" : "")>@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="control-group col-md-6">
+                                <label>Çocuk Sayısı</label>
+                                <select class="custom-select form-control" name="KidCount">
+                                    @for (int i = 0; i <= 10; i++)
+                                    {
+                                        <option value="@i" @(Model.KidCount == i ? "selected" : "")>@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-primary btn-block">Rezervasyonu Tamamla</button>
+                        </div>
+                    </form>
+                    <div class="col-md-4">
+                    <h3>Sipariş Özeti</h3>
+                    <ul class="list-group">
+                        @{
+                            var hotels = ViewBag.Hotels as IEnumerable<SelectListItem>;
+                            var selectedHotel = hotels?.FirstOrDefault(h => h.Value == Model.Hotel.HotelTopic.ToString());
+                        }
+                        <li class="list-group-item">
+                            <strong>Otel:</strong> @selectedHotel
+                        </li>
+                        <li class="list-group-item">
+                            <strong>İsim:</strong> @Model.FirstName @Model.LastName
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Telefon:</strong> @Model.Phone
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Email:</strong> @Model.Email
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Check-In:</strong> @Model.CheckInDate@*?.ToString("yyyy-MM-dd")*@
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Check-Out:</strong> @Model.CheckOutDate@*?.ToString("yyyy-MM-dd")*@
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Yetişkin Sayısı:</strong> @Model.AdultCount
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Çocuk Sayısı:</strong> @Model.KidCount
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<!-- Booking Section End -->
