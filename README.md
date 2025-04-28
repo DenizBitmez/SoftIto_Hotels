@@ -20,4 +20,7 @@ This project was developed as part of SoftIto's Backend Developer Training Progr
 ## Future Improvements:  
 - Plans to integrate **third-party payment systems** to make the payment process more comprehensive.  
 - Adding **multi-language support** to improve accessibility for users from different linguistic backgrounds.  
-- Optimizing the website for **mobile devices** to reach a broader user base.  
+- Optimizing the website for **mobile devices** to reach a broader user base.
+
+## License  
+This project is licensed under the [MIT License](LICENSE).  
